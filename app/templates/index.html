@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Server Monitoring Dashboard</title>
+
+<meta http-equiv="refresh" content="5">
+
+<style>
+
+body{
+font-family: Arial;
+background:#f4f6f8;
+text-align:center;
+}
+
+h1{
+margin-top:30px;
+}
+
+.card{
+width:350px;
+margin:20px auto;
+padding:20px;
+background:white;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+.low{
+color:green;
+font-weight:bold;
+}
+
+.medium{
+color:orange;
+font-weight:bold;
+}
+
+.high{
+color:red;
+font-weight:bold;
+}
+
+.info{
+margin-top:30px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Server Health Monitoring Dashboard</h1>
+
+<div class="card">
+
+<p>CPU Usage:
+<span class="{% if cpu < 50 %}low{% elif cpu < 80 %}medium{% else %}high{% endif %}">
+{{cpu}}%
+</span>
+</p>
+
+<p>Memory Usage:
+<span class="{% if memory < 50 %}low{% elif memory < 80 %}medium{% else %}high{% endif %}">
+{{memory}}%
+</span>
+</p>
+
+<p>Disk Usage:
+<span class="{% if disk < 50 %}low{% elif disk < 80 %}medium{% else %}high{% endif %}">
+{{disk}}%
+</span>
+</p>
+
+</div>
+
+
+<div class="info">
+
+<p><b>Last Updated:</b> {{last_updated}}</p>
+
+</div>
+
+
+</body>
+
+</html>
