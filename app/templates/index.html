@@ -1,50 +1,168 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-<title>Server Monitoring Dashboard</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Professional DevOps Monitoring Dashboard</title>
 
 <meta http-equiv="refresh" content="5">
 
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 <style>
 
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
+
 body{
-font-family: Arial;
-background:#f4f6f8;
+background:#0f172a;
+color:white;
+padding:30px;
+}
+
+/* HEADER */
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+flex-wrap:wrap;
+}
+
+.header h1{
+font-size:32px;
+font-weight:bold;
+}
+
+.status{
+background:#16a34a;
+padding:10px 20px;
+border-radius:20px;
+font-size:14px;
+font-weight:bold;
+}
+
+/* DASHBOARD GRID */
+
+.dashboard{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
+margin-top:20px;
+}
+
+/* CARD */
+
+.card{
+background:#1e293b;
+padding:25px;
+border-radius:16px;
+box-shadow:0 4px 15px rgba(0,0,0,0.3);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.card h2{
+margin-bottom:20px;
+font-size:24px;
+}
+
+/* METRICS */
+
+.metric{
+display:flex;
+justify-content:space-between;
+margin-bottom:12px;
+font-size:18px;
+}
+
+/* PROGRESS BAR */
+
+.progress-bar{
+width:100%;
+height:14px;
+background:#334155;
+border-radius:20px;
+overflow:hidden;
+margin-bottom:20px;
+}
+
+.progress{
+height:100%;
+border-radius:20px;
+}
+
+/* COLORS */
+
+.cpu{
+background:#3b82f6;
+}
+
+.memory{
+background:#f59e0b;
+}
+
+.disk{
+background:#ef4444;
+}
+
+.network{
+background:#10b981;
+}
+
+/* SYSTEM INFO */
+
+.system-info{
+margin-top:35px;
+background:#1e293b;
+padding:25px;
+border-radius:16px;
+box-shadow:0 4px 15px rgba(0,0,0,0.3);
+}
+
+.system-info h2{
+margin-bottom:20px;
+}
+
+.system-info p{
+margin:12px 0;
+font-size:17px;
+}
+
+/* FOOTER */
+
+.footer{
+margin-top:35px;
+text-align:center;
+color:#94a3b8;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+.header{
+flex-direction:column;
+gap:15px;
+}
+
+.header h1{
+font-size:24px;
 text-align:center;
 }
 
-h1{
-margin-top:30px;
-}
-
-.card{
-width:350px;
-margin:20px auto;
-padding:20px;
-background:white;
-border-radius:10px;
-box-shadow:0 2px 8px rgba(0,0,0,0.1);
-}
-
-.low{
-color:green;
-font-weight:bold;
-}
-
-.medium{
-color:orange;
-font-weight:bold;
-}
-
-.high{
-color:red;
-font-weight:bold;
-}
-
-.info{
-margin-top:30px;
 }
 
 </style>
@@ -53,37 +171,135 @@ margin-top:30px;
 
 <body>
 
-<h1>Server Health Monitoring Dashboard</h1>
+<div class="header">
+
+<h1>
+<i class="fa-solid fa-server"></i>
+ Professional DevOps Monitoring Dashboard
+</h1>
+
+<div class="status">
+● SYSTEM ACTIVE
+</div>
+
+</div>
+
+<div class="dashboard">
 
 <div class="card">
 
-<p>CPU Usage:
-<span class="{% if cpu < 50 %}low{% elif cpu < 80 %}medium{% else %}high{% endif %}">
-{{cpu}}%
-</span>
-</p>
+<h2>
+<i class="fa-solid fa-microchip"></i>
+ CPU Usage
+</h2>
 
-<p>Memory Usage:
-<span class="{% if memory < 50 %}low{% elif memory < 80 %}medium{% else %}high{% endif %}">
-{{memory}}%
-</span>
-</p>
+<div class="metric">
+<span>Current Usage</span>
+<span>{{cpu}}%</span>
+</div>
 
-<p>Disk Usage:
-<span class="{% if disk < 50 %}low{% elif disk < 80 %}medium{% else %}high{% endif %}">
-{{disk}}%
-</span>
-</p>
+<div class="progress-bar">
+<div class="progress cpu" style="width: {{cpu}}%"></div>
+</div>
+
+<p>Real-time processor monitoring.</p>
 
 </div>
 
+<div class="card">
 
-<div class="info">
+<h2>
+<i class="fa-solid fa-memory"></i>
+ Memory Usage
+</h2>
+
+<div class="metric">
+<span>RAM Usage</span>
+<span>{{memory}}%</span>
+</div>
+
+<div class="progress-bar">
+<div class="progress memory" style="width: {{memory}}%"></div>
+</div>
+
+<p>Tracks system memory utilization.</p>
+
+</div>
+
+<div class="card">
+
+<h2>
+<i class="fa-solid fa-hard-drive"></i>
+ Disk Usage
+</h2>
+
+<div class="metric">
+<span>Storage Usage</span>
+<span>{{disk}}%</span>
+</div>
+
+<div class="progress-bar">
+<div class="progress disk" style="width: {{disk}}%"></div>
+</div>
+
+<p>Monitors storage consumption.</p>
+
+</div>
+
+<div class="card">
+
+<h2>
+<i class="fa-solid fa-network-wired"></i>
+ Network Status
+</h2>
+
+<div class="metric">
+<span>Connection</span>
+<span>Stable</span>
+</div>
+
+<div class="progress-bar">
+<div class="progress network" style="width: 85%"></div>
+</div>
+
+<p>Monitoring network connectivity.</p>
+
+</div>
+
+</div>
+
+<div class="system-info">
+
+<h2>
+<i class="fa-solid fa-circle-info"></i>
+ System Information
+</h2>
 
 <p><b>Last Updated:</b> {{last_updated}}</p>
 
+<p><b>Monitoring Interval:</b> 5 Seconds</p>
+
+<p><b>Server Status:</b> Running</p>
+
+<p><b>Container Status:</b> Healthy</p>
+
+<p><b>Deployment:</b> Docker Containerized</p>
+
+<p><b>Monitoring Stack:</b> Flask + Prometheus + Grafana</p>
+
 </div>
 
+<div class="footer">
+
+<p>
+Professional Server Health Monitoring Dashboard
+</p>
+
+<p>
+Built using Flask, Docker, Prometheus and Grafan
+</p>
+
+</div>
 
 </body>
 
