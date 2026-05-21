@@ -1,4 +1,5 @@
 flask
+gunicorn
 psutil
 prometheus_client
 pytz
