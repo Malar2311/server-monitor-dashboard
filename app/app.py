@@ -3,6 +3,7 @@ import psutil
 from datetime import datetime
 from prometheus_client import Gauge, generate_latest, CONTENT_TYPE_LATEST
 import pytz
+import os
 
 app = Flask(__name__)
 
@@ -41,4 +42,4 @@ def metrics():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
