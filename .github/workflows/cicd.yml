@@ -5,9 +5,17 @@ on:
     branches: [ main ]
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: docker build -t flask-app .
+
   deploy:
     runs-on: ubuntu-latest
-
+    needs: build
     steps:
       - name: Deploy to server via SSH
         uses: appleboy/ssh-action@v1.0.0
